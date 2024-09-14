@@ -2,10 +2,31 @@ p style="color: green" = notice
 
 h1 Products
 
-#products
-  - @products.each do |product|
-    == render product
-    p
-      = link_to "Show this product", product
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Variants
+      th Quantity
+      - if current_user.is_a?(Admin)
+        th Actions
+  tbody
+    - @products.each do |product|
+      tr
+        td = product.name
+        td = product.description
+        td = product.variants
+        td = product.quantity
+        - if current_user.is_a?(Admin)
+          td
+            = link_to "Show", product
+            | |
+            = link_to "Edit", edit_product_path(product)
+            | |
+            = button_to "Destroy", product, method: :delete, data: { confirm: 'Are you sure?' }
+        - else
+          td
+            = link_to "Show", product
 
-= link_to "New product", new_product_path
+= link_to "New Product", new_product_path if current_user.is_a?(Admin)

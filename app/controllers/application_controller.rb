@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       admin_dashboard_path # Path to the admin dashboard
     elsif resource.is_a?(User)
-      user_dashboard_path # Path to the user dashboard (Assuming this is defined)
+      users_dashboard_path # Path to the user dashboard (Assuming this is defined)
     else
       super
     end
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       admin_dashboard_path 
     elsif resource.is_a?(User)
-      user_dashboard_path 
+      users_dashboard_path 
     else
       super
     end
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       if resource.is_a?(Admin)
         admin_dashboard_path
       elsif resource.is_a?(User)
-        user_dashboard_path
+        users_dashboard_path
       else
         super
       end

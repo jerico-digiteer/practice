@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-  resources :products
   devise_for :admins
   devise_for :users
 
-
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
+    resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
   end
-  
+
   namespace :users do
     get 'dashboard', to: 'dashboard#index'
   end
-  
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Regular routes for products (accessible by all users)
+  resources :products, only: [:index, :show]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Root path (you can adjust this to your preferred path)
+  root 'products#index'
 end
