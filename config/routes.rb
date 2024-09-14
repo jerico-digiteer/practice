@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
+  get 'home/index'
   devise_for :admins
   devise_for :users
 
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
-    resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :products
   end
 
   namespace :users do
     get 'dashboard', to: 'dashboard#index'
   end
 
-  # Regular routes for products (accessible by all users)
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show, :home]
 
-  # Root path (you can adjust this to your preferred path)
-  root 'products#index'
+  root 'home#index'
 end
