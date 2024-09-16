@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :create, :show]
   resource :cart, only: [:show]
   resource :checkout, only: [:show, :create]
+  
 
 
   resources :products, only: [:index, :show, :home]

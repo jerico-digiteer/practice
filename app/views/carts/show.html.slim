@@ -1,2 +1,21 @@
-h1 Carts#show
-p Find me in app/views/carts/show.html.slim
+h1 Your Cart
+
+- if @cart_items.any?
+  table.table
+    thead
+      tr
+        th Product Variant
+        th Quantity
+        th Price
+        th Total Price
+    tbody
+      - @cart_items.each do |cart_item|
+        tr
+          td = cart_item.product_variant.name
+          td = cart_item.quantity
+          td = number_to_currency(cart_item.price)
+          td = number_to_currency(cart_item.total_price)
+  p
+    = link_to 'Checkout', checkout_path, class: 'btn btn-primary'
+- else
+  p Your cart is empty.
