@@ -5,14 +5,9 @@ html
   body
     h1 Welcome to Our Application
 
-    - if user_signed_in?
-      p You are signed in as #{current_user.email}.
-      = button_to 'Logout', destroy_user_session_path, method: :delete
-    - else
-      p
-        = link_to 'Admin Login', new_admin_session_path, class: 'btn btn-primary'
-      p
-        = link_to 'User Login', new_user_session_path, class: 'btn btn-primary'
 
-    p
-      = link_to 'View Products', products_path
+p
+  = link_to 'User Login', new_user_session_path, class: 'btn btn-primary'      
+p
+  = link_to 'Admin Login', new_admin_session_path, class: 'btn btn-primary'
+      
