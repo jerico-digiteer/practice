@@ -17,7 +17,8 @@ table
             - product.product_variants.each do |variant|
               li = "#{variant.name} - $#{variant.price} (Stock: #{variant.stock_quantity})"
         td
-           = link_to 'Show', product_path(product), class: 'btn btn-info' 
-        // = link_to 'Add to Cart', add_to_cart_path(product), class: 'btn btn-success'
+          = link_to 'Show', product_path(product), class: 'btn btn-info'
+          - product.product_variants.each do |variant|
+            = button_to 'Add to Cart', cart_items_path(product_variant_id: variant.id, quantity: 1), method: :post, class: 'btn btn-success'
 p
   = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'

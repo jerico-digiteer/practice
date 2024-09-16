@@ -1,8 +1,9 @@
 p style="color: green" = notice
 
-== render @product
+= render @product
 
 p
-  = button_to 'Add to Cart', cart_items_path(product_variant_id: variant.id, quantity: 1), method: :post, class: 'btn btn-success' 
+  - @product.product_variants.each do |variant|
+    = button_to 'Add to Cart', cart_items_path(product_variant_id: variant.id, quantity: 1), method: :post, class: 'btn btn-success'
 
 = link_to "Back to Products", products_path, class: 'btn btn-secondary'

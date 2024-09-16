@@ -1,0 +1,6 @@
+h1 Checkout
+
+= form_with model: @order, url: orders_path, local: true do |f|
+  .field
+    = f.hidden_field :total_price, value: current_user.cart_items.sum(&:total_price)
+    = f.submit 'Place Order', class: 'btn btn-primary'

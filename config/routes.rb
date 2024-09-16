@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'checkout/show'
+  get 'checkout/create'
+  get 'carts/show'
   get 'home/index'
   devise_for :admins
   devise_for :users
@@ -12,8 +15,10 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
   end
 
-  resources :cart_items, only: [:create, :destroy]
-  get 'cart', to: 'cart_items#index'
+  resources :cart_items, only: [:create, :destroy, :show]
+  resources :orders, only: [:new, :create, :show]
+  resource :cart, only: [:show]
+  resource :checkout, only: [:show, :create]
 
 
   resources :products, only: [:index, :show, :home]

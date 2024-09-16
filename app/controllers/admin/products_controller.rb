@@ -1,7 +1,6 @@
 class Admin::ProductsController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_product, only: %i[show edit update destroy]
-  before_action :authorize_admin, only: %i[new create edit update destroy]
 
   # GET /admin/products
   def index
