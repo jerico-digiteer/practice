@@ -1,6 +1,5 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<% debugger %>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -42,14 +41,31 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  
+  <h3>Address</h3>
+  <div class="field">
+    <%= f.fields_for :address do |address_form| %>
+      <div>
+        <%= address_form.label :city %><br />
+        <%= address_form.text_field :city %>
+      </div>
+
+      <div>
+        <%= address_form.label :country %><br />
+        <%= address_form.text_field :country %>
+      </div>
+
+      <div>
+        <%= address_form.label :zip %><br />
+        <%= address_form.text_field :zip %>
+      </div>
+    <% end %>
+  </div>
+
+
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :wallet %><br />
-    <%= f.text_field :wallet %>
   </div>
 
   <div class="actions">

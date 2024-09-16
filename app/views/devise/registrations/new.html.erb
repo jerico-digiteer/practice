@@ -31,14 +31,31 @@
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
+
+    <h3>Address</h3>
+  <div class="field">
+    <%= f.fields_for :address do |address_form| %>
+      <div>
+        <%= address_form.label :city %><br />
+        <%= address_form.text_field :city %>
+      </div>
+
+      <div>
+        <%= address_form.label :country %><br />
+        <%= address_form.text_field :country %>
+      </div>
+
+      <div>
+        <%= address_form.label :zip %><br />
+        <%= address_form.text_field :zip %>
+      </div>
+    <% end %>
+  </div>
+
+
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :wallet %><br />
-    <%= f.text_field :wallet %>
   </div>
 
   <div class="actions">

@@ -1,5 +1,3 @@
-p style="color: green" = notice
-
 h1 Products
 
 table
@@ -8,15 +6,18 @@ table
       th Name
       th Description
       th Variants
-      th Quantity
+      th Actions
   tbody
     - @products.each do |product|
       tr
         td = product.name
         td = product.description
-        td = product.variants
-      //  td = product.quantity
-        td = link_to "Show", product
-
+        td
+          ul
+            - product.product_variants.each do |variant|
+              li = "#{variant.name} - $#{variant.price} (Stock: #{variant.stock_quantity})"
+        td
+           = link_to 'Show', product_path(product), class: 'btn btn-info' 
+        // = link_to 'Add to Cart', add_to_cart_path(product), class: 'btn btn-success'
 p
   = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'

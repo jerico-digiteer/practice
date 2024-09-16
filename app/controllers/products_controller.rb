@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[index show]
-  before_action :authorize_admin, only: %i[new create edit update destroy]
+  before_action :set_product, only: %i[show]
 
   # GET /products
   def index
@@ -10,6 +9,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
+    # User should be able to see this if authenticated
   end
 
   # GET /products/new

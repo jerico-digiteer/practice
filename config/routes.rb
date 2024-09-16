@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
   end
 
+  resources :cart_items, only: [:create, :destroy]
+  get 'cart', to: 'cart_items#index'
+
+
   resources :products, only: [:index, :show, :home]
   resource :wallet, only: [:show, :update]
 

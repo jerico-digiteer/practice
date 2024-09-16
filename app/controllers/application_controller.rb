@@ -44,11 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :phone_number, :wallet])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone_number, :wallet])
-  end
-
-  def current_admin
-    current_user.is_a?(Admin)
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :phone_number, :wallet, address_attributes: [:city, :country, :zip]])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone_number, :wallet, address_attributes: [:city, :country, :zip]])
   end
 end

@@ -1,13 +1,28 @@
-div id="#{dom_id product}"
+h1 = @product.name
+
+div
   p
-    strong Name:
-    =< product.name
-  p
-    strong Description:
-    =< product.description
-  p
-    strong Variants:
-    =< product.variants
-  p
-    strong Quantity:
-    =< product.quantity
+    strong Description: 
+    = @product.description
+
+hr
+
+h2 Product Variants
+
+- if @product.product_variants.any?
+  ul
+    - @product.product_variants.each do |variant|
+      li
+        p
+          strong Name: 
+          = variant.name
+        p
+          strong Price: 
+          = number_to_currency(variant.price)
+        p
+          strong Stock Quantity: 
+          = variant.stock_quantity
+else
+  p No other variants available.
+
+hr
