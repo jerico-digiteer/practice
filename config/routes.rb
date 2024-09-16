@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:index, :show, :home]
+  resource :wallet, only: [:show, :update]
 
   root 'home#index'
 end

@@ -1,0 +1,18 @@
+h3 Product Variants
+
+.fields
+  .nested-fields
+    div
+      = f.label :name
+      = f.text_field :name
+
+    div
+      = f.label :price
+      = f.number_field :price
+
+    div
+      = f.label :stock_quantity
+      = f.number_field :stock_quantity
+
+    div
+      = link_to "Remove", '#', class: 'remove_fields', data: { action: "fields#remove" }

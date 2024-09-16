@@ -47,12 +47,13 @@ class ProductsController < ApplicationController
   end
 
   private
+
     def set_product
       @product = Product.find(params[:id])
     end
 
     def product_params
-      params.require(:product).permit(:name, :description, :variants, :quantity)
+      params.require(:product).permit(:name, :description, product_variants_attributes: [:id, :name, :price, :stock_quantity, :_destroy])
     end
 
     def authorize_admin

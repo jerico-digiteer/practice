@@ -14,6 +14,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/new
   def new
     @product = Product.new
+    @product.product_variants.build # Initialize a variant for the form
   end
 
   # POST /admin/products
@@ -28,6 +29,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/1/edit
   def edit
+    @product.product_variants.build if @product.product_variants.empty? # Ensure at least one variant exists for editing
   end
 
   # PATCH/PUT /admin/products/1
@@ -54,6 +56,6 @@ class Admin::ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :description, :variants, :quantity)
+      params.require(:product).permit(:name, :description, product_variants_attributes: [:id, :name, :price, :stock_quantity, :_destroy])
     end
 end

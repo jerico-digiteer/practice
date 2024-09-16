@@ -1,0 +1,15 @@
+h1 My Wallet
+
+p
+  strong Current Balance: 
+  = number_to_currency(@user.wallet)
+
+= form_with url: wallet_path, method: :patch, local: true do |f|
+  div
+    = f.label :amount, 'Add Funds'
+    = f.number_field :amount, step: '0.01', min: '0.01', required: true
+
+  div
+    = f.submit 'Add Funds', class: 'btn btn-primary'
+p
+  = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'

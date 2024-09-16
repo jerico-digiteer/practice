@@ -14,13 +14,15 @@
     = f.label :description
     = f.text_area :description
 
-  div
-    = f.label :variants
-    = f.text_field :variants
-
-  div
-    = f.label :quantity
-    = f.number_field :quantity
+  div data-controller="fields" data-fields-target="container"
+    = f.fields_for :product_variants do |pv_form|
+      = render 'product_variant_fields', f: pv_form
+    .add-variant
+      = link_to_add_fields "Add Variant", f, :product_variants
 
   div
     = f.submit 'Save Product', class: 'btn btn-primary'
+
+  template data-fields-target="template"
+    = f.fields_for :product_variants, ProductVariant.new, child_index: 'NEW_RECORD' do |pv_form|
+      = render 'product_variant_fields', f: pv_form

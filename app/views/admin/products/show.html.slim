@@ -5,13 +5,25 @@ div
     strong Description: 
     = @product.description
 
-  p
-    strong Variants: 
-    = @product.variants
+hr
 
-  p
-    strong Quantity: 
-    = @product.quantity
+h2 Product Variants
+
+- if @product.product_variants.any?
+  ul
+    - @product.product_variants.each do |variant|
+      li
+        p
+          strong Name: 
+          = variant.name
+        p
+          strong Price: 
+          = number_to_currency(variant.price)
+        p
+          strong Stock Quantity: 
+          = variant.stock_quantity
+else
+  p No other variants available.
 
 hr
 
