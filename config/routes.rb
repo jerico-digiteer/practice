@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   resources :cart_items, only: [:create, :destroy, :show]
   resources :orders, only: [:new, :create, :show]
   resource :cart, only: [:show]
-  resource :checkout, only: [:show, :create]
-  
+  get 'checkout', to: 'checkouts#show'
+  post 'checkout', to: 'checkouts#create'
 
+  
+  
 
   resources :products, only: [:index, :show, :home]
   resource :wallet, only: [:show, :update]

@@ -1,4 +1,4 @@
-h1 Checkout
+h1 Checkout Summary
 
 - if @cart_items.any?
   table.table
@@ -15,6 +15,9 @@ h1 Checkout
           td = cart_item.quantity
           td = number_to_currency(cart_item.price)
           td = number_to_currency(cart_item.total_price)
+
+  p Total Amount: #{number_to_currency(@cart_items.sum(&:total_price))}
+
   = form_with url: checkout_path, method: :post do |form|
     = form.submit 'Complete Checkout', class: 'btn btn-primary'
 - else

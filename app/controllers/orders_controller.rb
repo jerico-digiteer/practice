@@ -26,7 +26,10 @@ class OrdersController < ApplicationController
       render :new
     end
   end
-
+  
+  def show 
+    @order = current_user.orders.find(params[:id])
+  end 
   private
 
   def order_params

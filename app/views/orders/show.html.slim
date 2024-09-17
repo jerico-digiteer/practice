@@ -1,0 +1,27 @@
+h1 Order Summary
+
+p Thank you for your purchase!
+p Your order number is #{@order.id}
+
+table.table
+  thead
+    tr
+      th Product
+      th Quantity
+      th Price
+      th Total
+  tbody
+    - @order.order_items.each do |item|
+      tr
+        td = item.product_variant.name
+        td = item.quantity
+        td = number_to_currency(item.price)
+        td = number_to_currency(item.total_price)
+
+p Total Amount: #{number_to_currency(@order.total_price)}
+
+h5 Your Wallet Balance is now:
+p = number_to_currency(current_user.wallet)
+
+p
+  = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'
