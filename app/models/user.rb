@@ -9,8 +9,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Add additional validations or associations if needed
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-  
+
 end

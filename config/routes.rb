@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
     resources :products
-    resources :orders, only: [:index, :show]
   end
 
   namespace :users do
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :cart_items, only: [:create, :destroy, :show]
-  resources :orders, only: [:new, :create, :show, :index]
+  resources :orders, only: [:new, :create, :show]
   resource :cart, only: [:show]
   get 'checkout', to: 'checkouts#show'
   post 'checkout', to: 'checkouts#create'

@@ -1,36 +1,27 @@
-h1 Order ##{@order.id}
+h1 Order Summary
 
-p
-  strong Date:
-  = @order.created_at.strftime("%B %d, %Y")
+p Thank you for your purchase!
+p Your order number is #{@order.id}
 
-p
-  strong Total Price:
-  = number_to_currency(@order.total_price)
-
-p
-  strong Payment Status:
-  = @order.payment_status.capitalize
-
-p
-  strong Shipment Status:
-  = @order.shipment_status.capitalize
-
-h2 Order Items
 table.table
   thead
     tr
       th Product
       th Quantity
       th Price
-      th Total Price
+      th Total
   tbody
     - @order.order_items.each do |item|
       tr
         td = item.product_variant.name
         td = item.quantity
         td = number_to_currency(item.price)
-        td = number_to_currency(item.quantity * item.price)
+        td = number_to_currency(item.total_price)
+
+p Total Amount: #{number_to_currency(@order.total_price)}
+
+h5 Your Wallet Balance is now:
+p = number_to_currency(current_user.wallet)
 
 p
-  = link_to 'Back to Orders', orders_path, class: 'btn btn-primary'
+  = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'
