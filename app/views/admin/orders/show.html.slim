@@ -1,0 +1,37 @@
+p
+  | Order ID: 
+  = @order.id
+
+p
+  | Customer: 
+  = @order.user.full_name
+
+p
+  | Total Amount: 
+  = number_to_currency(@order.total_price)
+
+p
+  | Status: 
+  = @order.shipment_status
+
+p
+  | Payment: 
+  = @order.payment_status
+h3 Ordered Items:
+
+ul
+  - @order.order_items.each do |item|
+    li
+      | Item: 
+      = item.product_variant.product.name
+    li      
+      | Quantity: 
+      = item.quantity
+    li
+      | Price: 
+      = number_to_currency(item.price)
+
+= link_to 'Admin Dashboard', admin_dashboard_path, class: 'btn btn-primary'
+
+p
+    = link_to 'Back to Orders',  admin_orders_path, class: 'btn btn-primary'

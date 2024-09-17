@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
     resources :products
+    resources :orders, only: [:index, :show]
+
   end
 
   namespace :users do
