@@ -13,12 +13,12 @@ table
         td = product.name
         td = product.description
         td
-          = form_with url: cart_items_path, method: :post, class: 'form-inline' do
-            = hidden_field_tag :product_id, product.id
-            = select_tag :product_variant_id, options_from_collection_for_select(product.product_variants, :id, :name_and_price), prompt: 'Select a variant', class: 'form-control'
-            = number_field_tag :quantity, 1, in: 1..product.product_variants.maximum(:stock_quantity).to_i, class: 'form-control'
-            = submit_tag 'Add to Cart', class: 'btn btn-success'
+          ul
+            - product.product_variants.each do |variant|
+              li = "#{variant.name} - $#{variant.price} (Stock: #{variant.stock_quantity})"
         td
           = link_to 'Show', product_path(product), class: 'btn btn-info'
+          - product.product_variants.each do |variant|
+            = button_to 'Add to Cart', cart_items_path(product_variant_id: variant.id, quantity: 1), method: :post, class: 'btn btn-success'
 p
   = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'
