@@ -1,9 +1,19 @@
 p style="color: green" = notice
 
-= render @product
+h2 = @product.name
+p = @product.description
 
-p
+h3 Variants
+ul
   - @product.product_variants.each do |variant|
-    = button_to 'Add to Cart', cart_items_path(product_variant_id: variant.id, quantity: 1), method: :post, class: 'btn btn-success'
+    li
+      | #{variant.name} - $#{variant.price} (Stock: #{variant.stock_quantity})
+      - if variant.stock_quantity > 0
+        = form_with url: cart_items_path, method: :post, class: 'form-inline' do
+          = hidden_field_tag :product_variant_id, variant.id
+          = number_field_tag :quantity, 1, in: 1..variant.stock_quantity, class: 'form-control'
+          = submit_tag 'Add to Cart', class: 'btn btn-success'
+      - else
+        p.text-danger Out of Stock
 
 = link_to "Back to Products", products_path, class: 'btn btn-secondary'

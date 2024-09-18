@@ -10,8 +10,16 @@ class CartItemsController < ApplicationController
       return
     end
 
-    @cart_item.quantity ||= 0
-    @cart_item.quantity += params[:quantity].to_i
+    requested_quantity = params[:quantity].to_i
+    current_quantity_in_cart = @cart_item.quantity || 0
+    total_requested_quantity = current_quantity_in_cart + requested_quantity
+
+    if total_requested_quantity > product_variant.stock_quantity
+      redirect_back fallback_location: products_path, alert: "Only #{product_variant.stock_quantity} items available in stock."
+      return
+    end
+
+    @cart_item.quantity = total_requested_quantity
     @cart_item.price = product_variant.price
     @cart_item.total_price = @cart_item.price * @cart_item.quantity
 
