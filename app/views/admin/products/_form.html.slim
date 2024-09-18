@@ -15,6 +15,10 @@
     = f.text_area :description
 
   div data-controller="fields" data-fields-target="container"
+    template data-fields-target="template"
+      = f.fields_for :product_variants, ProductVariant.new, child_index: 'NEW_RECORD' do |pv_form|
+        = render 'product_variant_fields', f: pv_form
+
     = f.fields_for :product_variants do |pv_form|
       = render 'product_variant_fields', f: pv_form    
     .add-variant
@@ -23,6 +27,3 @@
   div
     = f.submit 'Save Product', class: 'btn btn-primary'
 
-  template data-fields-target="template"
-    = f.fields_for :product_variants, ProductVariant.new, child_index: 'NEW_RECORD' do |pv_form|
-      = render 'product_variant_fields', f: pv_form
