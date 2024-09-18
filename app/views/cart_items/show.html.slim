@@ -4,6 +4,7 @@ h1 Your Cart
   table
     thead
       tr
+        th Product Name      
         th Product Variant
         th Quantity
         th Price
@@ -11,6 +12,7 @@ h1 Your Cart
     tbody
       - @cart_items.each do |cart_item|
         tr
+          td = cart_item.product_variant.product.name
           td = cart_item.product_variant.name
           td = cart_item.quantity
           td = number_to_currency(cart_item.price)
