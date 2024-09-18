@@ -16,9 +16,9 @@
 
   div data-controller="fields" data-fields-target="container"
     = f.fields_for :product_variants do |pv_form|
-      = render 'product_variant_fields', f: pv_form
+      = render 'product_variant_fields', f: pv_form    
     .add-variant
-      = link_to_add_fields "Add Variant", f, :product_variants
+      = link_to 'Add Variant', '#', class: 'btn btn-secondary', data: { action: "click->fields#add" }
 
   div
     = f.submit 'Save Product', class: 'btn btn-primary'

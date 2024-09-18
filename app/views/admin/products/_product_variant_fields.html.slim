@@ -2,6 +2,7 @@ h3 Product Variants
 
 .fields
   .nested-fields
+    = f.hidden_field :_destroy
     div
       = f.label :name
       = f.text_field :name
@@ -15,4 +16,4 @@ h3 Product Variants
       = f.number_field :stock_quantity
 
     div
-      = link_to "Remove", '#', class: 'remove_fields', data: { action: "fields#remove" }
+      = link_to 'Remove', '#', class: 'btn btn-danger remove_fields', data: { action: "click->fields#remove" }
