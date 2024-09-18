@@ -15,11 +15,14 @@ table
         td = product.name
         td = product.description
         td
-          = form_with url: cart_items_path, method: :post, class: 'form-inline', data: { turbo_frame: "product_#{product.id}" } do
-            = hidden_field_tag :product_id, product.id
-            = select_tag :product_variant_id, options_from_collection_for_select(product.product_variants, :id, :name_and_price), prompt: 'Select a variant', class: 'form-control'
-            = number_field_tag :quantity, 1, in: 1..product.product_variants.maximum(:stock_quantity).to_i, class: 'form-control'
-            = submit_tag 'Add to Cart', class: 'btn btn-success'
+          - if product.product_variants.any?(&:in_stock?)
+            = form_with url: cart_items_path, method: :post, class: 'form-inline', data: { turbo_frame: "product_#{product.id}" } do
+              = hidden_field_tag :product_id, product.id
+              = select_tag :product_variant_id, options_from_collection_for_select(product.product_variants, :id, :name_and_price), prompt: 'Select a variant', class: 'form-control'
+              = number_field_tag :quantity, 1, in: 1..product.product_variants.maximum(:stock_quantity).to_i, class: 'form-control'
+              = submit_tag 'Add to Cart', class: 'btn btn-success'
+          - else
+            span Out of Stock
         td
           = link_to 'Show', product_path(product), class: 'btn btn-info'
 

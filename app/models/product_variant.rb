@@ -9,4 +9,8 @@ class ProductVariant < ApplicationRecord
   def name_and_price
     "#{name} - $#{price} (Stock: #{stock_quantity})"
   end
+
+  def in_stock?
+    stock_quantity > 0
+  end
 end
