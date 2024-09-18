@@ -9,5 +9,9 @@ module ApplicationHelper
       # Generate a link with data attributes to add fields dynamically
       link_to(name, '#', class: "add_fields btn btn-secondary", data: { id: "new_#{association}", fields: fields.gsub("\n", "") })
     end
+
+    def name_and_price(variant)
+      "#{variant.name} - $#{variant.price} (Stock: #{variant.stock_quantity})"
+    end
   end
   

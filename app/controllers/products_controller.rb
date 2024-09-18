@@ -1,10 +1,12 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: %i[index show]
   before_action :set_product, only: %i[show]
+  
+  helper_method :sort_column, :sort_direction
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.all.order("#{sort_column} #{sort_direction}")
   end
 
   # GET /products/1
@@ -48,15 +50,23 @@ class ProductsController < ApplicationController
 
   private
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    def product_params
-      params.require(:product).permit(:name, :description, product_variants_attributes: [:id, :name, :price, :stock_quantity, :_destroy])
-    end
+  def product_params
+    params.require(:product).permit(:name, :description, product_variants_attributes: [:id, :name, :price, :stock_quantity, :_destroy])
+  end
 
-    def authorize_admin
-      redirect_to products_path, alert: 'You are not authorized to perform this action.' unless current_admin
-    end
+  def authorize_admin
+    redirect_to products_path, alert: 'You are not authorized to perform this action.' unless current_admin
+  end
+
+  def sort_column
+    %w[name description].include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end
