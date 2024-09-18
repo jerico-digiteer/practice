@@ -1,9 +1,8 @@
 class Admin::OrdersController < ApplicationController
-      # Ensure only admins can access this controller
       before_action :authenticate_admin!
   
       def index
-        @orders = Order.all # Fetch all orders for the admin view
+        @orders = Order.all 
       end
   
       def show
