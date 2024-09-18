@@ -14,6 +14,10 @@
     = f.label :description
     = f.text_area :description
 
+  div 
+     h3 Product Variants
+
+
   div data-controller="fields" data-fields-target="container"
     template data-fields-target="template"
       = f.fields_for :product_variants, ProductVariant.new, child_index: 'NEW_RECORD' do |pv_form|
