@@ -3,6 +3,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :address
   has_many :cart_items, dependent: :destroy
   has_many :orders
+  has_many :reviews
 
   # Devise modules
   devise :database_authenticatable, :registerable,

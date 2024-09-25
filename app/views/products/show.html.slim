@@ -17,3 +17,25 @@ ul
         p.text-danger Out of Stock
 
 = link_to "Back to Products", products_path, class: 'btn btn-secondary'
+
+h3 Reviews
+
+- @product.reviews.each do |review|
+  div.review
+    p
+      strong = review.user.first_name
+      | (Rating: #{review.rating} stars)
+    p = review.comment
+
+- if @can_review
+  h4 Leave a Review
+  = form_with model: [ @product, Review.new ], local: true do |form|
+    .form-group
+      = form.label :rating, "Rating (0-5)"
+      = form.number_field :rating, in: 0..5, class: 'form-control'
+      
+    .form-group
+      = form.label :comment, "Comment"
+      = form.text_area :comment, class: 'form-control'
+      
+    = form.submit 'Submit Review', class: 'btn btn-primary'

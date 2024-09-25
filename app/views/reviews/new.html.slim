@@ -1,0 +1,16 @@
+h1 New Review for #{product.name}
+
+= form_with model: [@product, @review], local: true do |f|
+  .form-group
+    = f.label :rating, "Rating (0 to 5 stars)"
+    = f.number_field :rating, in: 0..5, class: 'form-control'
+
+  .form-group
+    = f.label :comment, "Comment"
+    = f.text_area :comment, class: 'form-control'
+
+  .form-group
+    = f.submit "Submit Review", class: 'btn btn-primary'
+
+p
+  = link_to 'Back to Product', product_path(@product), class: 'btn btn-secondary'

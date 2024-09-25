@@ -11,7 +11,8 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    # User should be able to see this if authenticated
+    @reviews = @product.reviews.includes(:user) # Loads the reviews for the product
+    @can_review = can_review? 
   end
 
   # GET /products/new
@@ -69,4 +70,11 @@ class ProductsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
+  def can_review?
+    OrderItem.joins(:order)
+              .where(orders: { user_id: current_user.id }, product_variant_id: @product.product_variants.pluck(:id))
+              .exists?
+  end
+  
 end

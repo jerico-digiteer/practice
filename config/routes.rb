@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     resources :products
     resources :orders, only: [:index, :show]
 
+    resources :reviews, only: [:index, :destroy] do
+      member do
+        post :hide
+      end
+    end
   end
 
   namespace :users do
@@ -23,10 +28,10 @@ Rails.application.routes.draw do
   get 'checkout', to: 'checkouts#show'
   post 'checkout', to: 'checkouts#create'
 
-  
-  
+  resources :products, only: [:index, :show, :home] do
+    resources :reviews, only: [:new, :create, :index, :edit, :update, :destroy]
+  end
 
-  resources :products, only: [:index, :show, :home]
   resource :wallet, only: [:show, :update]
 
   root 'home#index'

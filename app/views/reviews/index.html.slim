@@ -1,0 +1,25 @@
+h1 Reviews for #{@product.name}
+
+- if @reviews.any?
+  ul.reviews-list
+    - @reviews.each do |review|
+      li.review-item
+        p
+          strong Rating(0-5): 
+          | #{review.rating}
+        p
+          strong Comment: 
+          | #{review.comment}
+        p
+          strong User: 
+          | #{review.user.full_name} 
+        p.actions
+          = link_to 'Edit', edit_product_review_path(@product, review)
+          = button_to 'Delete', product_review_path(@product, review), method: :delete, data: { confirm: 'Are you sure?' }
+- else
+  p No reviews available for this product.
+
+
+p
+  = link_to 'View Products', products_path
+
