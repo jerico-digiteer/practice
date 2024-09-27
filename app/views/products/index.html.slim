@@ -25,6 +25,6 @@ table
             span Out of Stock
         td
           = link_to 'Show', product_path(product), class: 'btn btn-info'
-
+          = link_to 'Show Reviews', product_reviews_path(product), class: 'btn btn-secondary'
 p
   = link_to 'User Dashboard', users_dashboard_path, class: 'btn btn-primary'
